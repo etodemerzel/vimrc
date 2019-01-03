@@ -1,0 +1,87 @@
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER:
+#+LATEX_HEADER_EXTRA:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+SUBTITLE:
+#+LATEX_COMPILER: pdflatex
+#+DATE: [2019-01-03 Чт 11:43]
+#+STARTUP: hidestars latexpreview content 
+
+* vim
+
+  [[https://habr.com/company/mailru/blog/340740/][Статья по полезным плагинам для vim]]
+  [[https://vimawesome.com/][Список самых vim плагинов]]
+  
+** Плагины
+
+*** Пакетные менеджеры
+**** pathogen
+     :LOGBOOK:
+     CLOCK: [2019-01-03 Чт 11:46]
+     :END:
+
+     
+*** vim powerline
+    :LOGBOOK:
+    CLOCK: [2019-01-02 Ср 18:53]--[2019-01-02 Ср 18:55] =>  0:02
+    :END:
+
+    1. Установка
+       Устанавливается с помощью pip
+
+       #+BEGIN_SRC shell
+         pip install --user git+git://github.com/powerline/powerline
+       #+END_SRC
+
+    2. Чтобы посмотреть место расположения пакета необходимо
+
+       #+BEGIN_SRC shell
+         pip show powerline-status
+       #+END_SRC
+
+       #+RESULTS:
+       | Name:         | powerline-status                                            |              |                   |          |
+       | Version:      | 2.7.dev9999-git.b-5d82d544f3366a214732aeb8f781d50ced38ceef- |              |                   |          |
+       | Summary:      | The                                                         | ultimate     | statusline/prompt | utility. |
+       | Home-page:    | https://github.com/powerline/powerline                      |              |                   |          |
+       | Author:       | Kim                                                         | Silkebaekken |                   |          |
+       | Author-email: | kim.silkebaekken+vim@gmail.com                              |              |                   |          |
+       | License:      | MIT                                                         |              |                   |          |
+       | Location:     | /home/ludwig/.local/lib64/python3.6/site-packages           |              |                   |          |
+       | Requires:     |                                                             |              |                   |          |
+       | Required-by:  |                                                             |              |                   |          |
+
+    3. Для vim подключение происходит добавлением следующих строк в конфигруационный файл
+
+       #+BEGIN_SRC 
+       set rtp+=/home/ludwig/.local/lib64/python3.6/site-packages/powerline/bindings/vim
+       set laststatus=2
+       set t_Co=256
+       #+END_SRC
+
+
+**** DONE Включение поддержки python vim'ом
+     CLOSED: [2019-01-02 Ср 19:29]
+
+     - CLOSING NOTE [2019-01-02 Ср 19:29] \\
+       Достаточно собрать vim с флагом python
+     SCHEDULED: <2019-01-02 Ср>
+
+     После установки powerline по иструкции, запуск vim из терминала встретил сообщением
+     
+     #+BEGIN_SRC shell
+       You need vim compiled with Python 2.6, 2.7 or 3.2 and later support
+       for Powerline to work. Please consult the documentation for more
+       details.
+       Нажмите ENTER или введите команду для продолжения
+     #+END_SRC
+
+     Оказалось, что vim был собран без флага python
+
+     #+BEGIN_SRC shell
+       app-editors/vim-8.1.0648::gentoo  USE="X acl nls -cscope -debug -gpm -lua -luajit -minimal -perl -python -racket -ruby (-selinux) -tcl -terminal -vim-pager"
+     #+END_SRC
+
+     Добавление флага python исправляет ситуацию.
