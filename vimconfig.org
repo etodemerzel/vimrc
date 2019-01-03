@@ -17,12 +17,22 @@
 ** Плагины
 
 *** Пакетные менеджеры
-**** pathogen
+**** pathogen.vim
      :LOGBOOK:
      CLOCK: [2019-01-03 Чт 11:46]
      :END:
 
-     
+     Менеджер автоматической загрузки плагинов, расположенных по адресу ~/.vim/bundle
+
+     1. Установка
+        Скачанный из [[https://github.com/tpope/vim-pathogen][репозитория]] файл pathogen.vim отправляем в папку ~/.vim/autoload
+     2. В конфигурационном файле указываем
+        
+        #+BEGIN_SRC shell :tangle ~/.vimrc
+        execute pathogen#infect()
+        syntax on
+        filetype plugin indent on
+        #+END_SRC
 *** vim powerline
     :LOGBOOK:
     CLOCK: [2019-01-02 Ср 18:53]--[2019-01-02 Ср 18:55] =>  0:02
