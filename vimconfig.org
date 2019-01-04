@@ -12,14 +12,26 @@
 * vim
 
   [[https://habr.com/company/mailru/blog/340740/][Статья по полезным плагинам для vim]]
+  
   [[https://vimawesome.com/][Список самых vim плагинов]]
   
+** Отображения текста
+   :LOGBOOK:
+   CLOCK: [2019-01-03 Чт 20:09]--[2019-01-03 Чт 20:10] =>  0:01
+   :END:
+
+   1. [X] Нумерация строк по умолчанию
+
+      #+BEGIN_SRC shell :tangle ~/.vimrc
+        set number
+      #+END_SRC
 ** Плагины
 
 *** Пакетные менеджеры
 **** pathogen.vim
      :LOGBOOK:
-     CLOCK: [2019-01-03 Чт 11:46]
+     CLOCK: [2019-01-03 Чт 20:11]--[2019-01-03 Чт 20:12] =>  0:01
+     CLOCK: [2019-01-03 Чт 11:46]--[2019-01-03 Чт 18:33] =>  6:47
      :END:
 
      Менеджер автоматической загрузки плагинов, расположенных по адресу ~/.vim/bundle
@@ -33,6 +45,38 @@
         syntax on
         filetype plugin indent on
         #+END_SRC
+
+
+     Теперь любой плагин в директории ~/.vim/bundle будет загружать автоматически. 
+**** COMMENT vimplug
+     :LOGBOOK:
+     CLOCK: [2019-01-03 Чт 20:59]
+     :END:
+
+     В смысле гибкости настроек кмк уступает патогену. Ergo отключаю.
+     [[https://github.com/junegunn/vim-plug][Гитхаб расширения]].
+
+     Устанавливается копированием фалйа plug.vim в директорию ~/.vim/autoload
+
+     Указание директории с плагинами
+     #+BEGIN_SRC shell :tangle ~/.vimrc
+       call plug#begin('~/.vim/plugged')
+     #+END_SRC
+
+     Установка fzf
+     
+     #+BEGIN_SRC shell :tangle ~/.vimrc
+       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+       Plug 'junegunn/fzf.vim'
+     #+END_SRC
+
+     Завершение вызова vimPlug
+
+     #+BEGIN_SRC shell :tangle ~/.vimrc 
+       call plug#end()
+     #+END_SRC
+
+     
 *** vim powerline
     :LOGBOOK:
     CLOCK: [2019-01-02 Ср 18:53]--[2019-01-02 Ср 18:55] =>  0:02
@@ -65,7 +109,7 @@
 
     3. Для vim подключение происходит добавлением следующих строк в конфигруационный файл
 
-       #+BEGIN_SRC 
+       #+BEGIN_SRC shell :tangle ~/.vimrc 
        set rtp+=/home/ludwig/.local/lib64/python3.6/site-packages/powerline/bindings/vim
        set laststatus=2
        set t_Co=256
@@ -95,3 +139,46 @@
      #+END_SRC
 
      Добавление флага python исправляет ситуацию.
+*** NERDTree
+    :LOGBOOK:
+    CLOCK: [2019-01-03 Чт 20:12]--[2019-01-03 Чт 20:23] =>  0:11
+    :END:
+
+    | Ключ | Описание                          |
+    |------+-----------------------------------|
+    | I    | показывать/скрывать скрытые файлы |
+    |------+-----------------------------------|
+    | ?    | показать/скрыть помощь            |
+    |      |                                   |
+    Плагин для навигации по файлам ввиде древовидной структуры.
+    Устанавливал с помощью pathogen
+    #+BEGIN_SRC shell
+      tree ~/.vim/bundle/nerdtree
+    #+END_SRC
+
+
+    Единственная конфигруционная строчка файла связывает клавишу f9 с открытием панели nerdtree.
+
+    #+BEGIN_SRC shell :tangle ~/.vimrc    
+      map <F9> :NERDTreeToggle<CR>
+    #+END_SRC
+*** fzf
+    :LOGBOOK:
+    CLOCK: [2019-01-04 Пт 20:18]
+    :END:
+
+    Фьюзи файендер. Может использоваться в vim следующим образом
+
+    #+BEGIN_SRC shell
+      vim $(fzf)
+    #+END_SRC
+
+    #+RESULTS:
+
+
+    Однако, лучше его использовать как плагин
+
+    #+BEGIN_SRC shell :tangle ~/.vimrc
+      set rtp+=~/.fzf
+    #+END_SRC
+    
